@@ -11,7 +11,18 @@ import telebot
 from telebot import types, apihelper
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+# Веб-сервер для прохождения проверки Render
+app = Flask('')
 
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_web():
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
+
+threading.Thread(target=run_web, daemon=True).start()
 # ==================== 1. НАСТРОЙКИ И КОНСТАНТЫ ====================
 
 # Загрузка .env строго из папки, где лежит сам скрипт
